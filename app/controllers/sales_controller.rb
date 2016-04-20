@@ -5,7 +5,7 @@ class SalesController < WebServiceController
   end
 
   def show # Show a single Sale by 'id'
-    id = nil # Hint: look at the 'params' hash
+    id = params['id'] # Hint: look at the 'params' hash
     sale = Sale.find id
     render json: sale
   end
@@ -15,7 +15,10 @@ class SalesController < WebServiceController
     #       by checking sale.valid? and looking at the
     #       sale.errors array in the debugger
     sale = Sale.new sale_params
+    sale.total = 0
+    sale_params['items'].each{ | item | sale.total+= item['price'].to_f }
     sale.save
+
 
     render json: sale
   end

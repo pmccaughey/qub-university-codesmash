@@ -29,6 +29,7 @@ describe 'Exercise 2: Sales API - Discounted Transactions' do
       end
 
       it 'should return the total' do
+        binding.pry
         expect(json['total']).to eql(3.50)
       end
     end
